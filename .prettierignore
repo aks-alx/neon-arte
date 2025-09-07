@@ -1,0 +1,17 @@
+# Salidas y dependencias
+dist
+node_modules
+.build
+.astro
+coverage
+build
+*.log
+
+# Plataformas de deploy
+.vercel
+.netlify
+
+# Configs generadas/locks
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

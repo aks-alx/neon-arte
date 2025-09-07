@@ -1,0 +1,58 @@
+/* Tailwind v4 importa todo en una sola línea */
+@import "tailwindcss";
+
+/* Fuentes */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+
+/* 🎨 Tokens de tema */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", var(--font-sans);
+
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+
+  --color-neon-pink: #ff1aff;
+  --color-neon-cyan: #00eaff;
+  --color-neon-violet: #7a5cff;
+
+  --shadow-neon-pink: 0 0 30px rgba(255, 26, 255, 0.4);
+  --shadow-neon-cyan: 0 0 30px rgba(0, 234, 255, 0.4);
+  --shadow-neon-violet: 0 0 30px rgba(122, 92, 255, 0.4);
+}
+
+/* Base */
+:root { color-scheme: dark; }
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Clase utilitaria para títulos */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Overlay de grano sutil (usa /public/noise.png si quieres) */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: url("/noise.png") repeat;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+/* Accesibilidad: menos animaciones para quien lo prefiera */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,32 @@
+---
+/**
+ * Controles de música accesibles:
+ * - Play/Pause
+ * - Volumen +/-
+ */
+---
+
+<div
+  class="fixed bottom-6 right-6 z-40 flex gap-2 bg-black/40 backdrop-blur px-3 py-2 rounded-full"
+  aria-label="Controles de música"
+>
+  <button
+    id="toggle"
+    aria-pressed="true"
+    class="focus:outline-none px-3 py-1 rounded text-white border border-white/30 hover:bg-white/10"
+  >
+    Pausa
+  </button>
+  <button
+    id="vol-down"
+    class="focus:outline-none px-3 py-1 rounded text-white border border-white/30 hover:bg-white/10"
+  >
+    Vol -
+  </button>
+  <button
+    id="vol-up"
+    class="focus:outline-none px-3 py-1 rounded text-white border border-white/30 hover:bg-white/10"
+  >
+    Vol +
+  </button>
+</div>

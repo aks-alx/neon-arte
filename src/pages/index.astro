@@ -1,11 +1,70 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import "../styles/globals.css";
+import Gallery from "../components/Gallery";
+import Gate from "../components/Gate.astro";
+import Controls from "../components/Controls.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const slides = [
+  {
+    src: "/img/15-Astroworld.webp",
+    alt: "Portada estilo feria nocturna",
+    title: "ASTROWORLD (2018)",
+    fact:
+      "Lanzado el 3 de agosto de 2018, el álbum toma su nombre del parque temático Six Flags AstroWorld de Houston, cerrado en 2005; la nostalgia del parque inspira el concepto visual.",
+  },
+  {
+    src: "/img/16-Astroworld.webp",
+    alt: "Ambiente neón con túnel",
+    title: "Arte por David LaChapelle",
+    fact:
+      "La portada tiene dos versiones (día y noche) fotografiadas por David LaChapelle. La edición nocturna enfatiza el mood psicodélico del álbum.",
+  },
+  {
+    src: "/img/17-Astroworld.webp",
+    alt: "Luces y humo psicodélico",
+    title: "Éxito y colaboraciones",
+    fact:
+      "Debutó #1 en Billboard 200 y fue nominado al Grammy como Mejor Álbum de Rap. Destacan 'SICKO MODE' (con Drake) y aportes de Frank Ocean, The Weeknd, Swae Lee y 21 Savage.",
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="es" class="grain">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neon Psychedelic Art</title>
+  </head>
+  <body>
+    <Gallery client:load slides={slides} delay={4600} />
+    <Controls />
+    <Gate buttonId="enter-btn" />
+
+    <audio id="bgm" src="audio/Travis Scott - SICKO MODE (Audio).mp3" preload="auto" loop></audio>
+
+    <script is:raw>
+      const audio = document.getElementById('bgm');
+      const btn = document.getElementById('enter-btn');
+      const toggle = document.getElementById('toggle');
+      const volUp = document.getElementById('vol-up');
+      const volDown = document.getElementById('vol-down');
+      const clamp = (v) => Math.max(0, Math.min(1, v));
+
+      btn.addEventListener('click', async () => {
+        try { audio.volume = 0.7; await audio.play(); btn.parentElement.remove(); }
+        catch { alert("Activa el audio para continuar"); }
+      });
+
+      toggle?.addEventListener('click', async () => {
+        if (audio.paused) { await audio.play(); toggle.textContent = "Pausa"; toggle.setAttribute("aria-pressed","true"); }
+        else { audio.pause(); toggle.textContent = "Reproducir"; toggle.setAttribute("aria-pressed","false"); }
+      });
+      volUp?.addEventListener('click', () => (audio.volume = clamp(audio.volume + 0.1)));
+      volDown?.addEventListener('click', () => (audio.volume = clamp(audio.volume - 0.1)));
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && !audio.paused) audio.pause();
+      });
+    </script>
+  </body>
+</html>

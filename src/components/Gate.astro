@@ -1,0 +1,20 @@
+---
+/**
+ * Overlay inicial para pedir consentimiento de reproducir música
+ * Se elimina cuando el usuario da clic en "Entrar".
+ */
+const { buttonId = "enter-btn" } = Astro.props;
+---
+
+<div
+  class="fixed inset-0 z-50 grid place-items-center bg-black/95"
+  role="dialog"
+  aria-modal="true"
+>
+  <button
+    id={buttonId}
+    class="px-8 py-4 rounded-full font-bold text-black bg-neon-pink drop-shadow-[0_0_15px_#ff1aff] hover:scale-105 transition"
+  >
+    Entrar
+  </button>
+</div>
